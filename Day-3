@@ -1,0 +1,49 @@
+#include<LiquidCrystal.h>
+int RS=2,EN=12,D4=7,D5=8,D6=9,D7=10;
+int Rs=11,En=13,d4=A0,d5=A1,d6=A2,d7=A3;
+LiquidCrystal lcd1(RS,EN,D4,D5,D6,D7);
+LiquidCrystal lcd2(Rs,En,d4,d5,d6,d7);
+int button1=5;
+int button2=6;
+int led1=3;
+int led2=4;
+int value1;
+int value2;
+bool state1 = false;
+bool state2 = false;
+void setup() {
+  pinMode(button1,INPUT);
+  pinMode(button2,INPUT);
+  pinMode(led1,OUTPUT);
+  pinMode(led2,OUTPUT);
+  lcd1.begin(16,2);
+  lcd2.begin(16,2);
+
+}
+
+void loop() {
+  value1=digitalRead(button1);
+  value2=digitalRead(button2);
+  
+  if(value1==1){
+    state1=!state1;
+    delay(300);
+    digitalWrite(led1,state1 ? HIGH:LOW);
+    lcd1.setCursor(0,0);
+    lcd1.print("LED 1");
+    lcd1.setCursor(0,1);
+    lcd1.print(state1 ? "LIGHT ON " : "LIGHT OFF");
+  }
+   if(value2==1){
+    
+    state2=!state2;
+    delay(300);
+    digitalWrite(led2,state2 ? HIGH:LOW);
+    lcd2.setCursor(0,0);
+    lcd2.print("LED 2");
+    lcd2.setCursor(0,1);
+    lcd2.print(state2 ? "LIGHT ON " : "LIGHT OFF");
+   }
+  
+
+}
